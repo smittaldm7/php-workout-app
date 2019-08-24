@@ -124,7 +124,7 @@ class controller
 			
 			$name = $_POST["name"];
 			$email = $_POST["email"];
-			$password = md5($_POST["password"]);
+			$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 			
 			$success = $stmt->execute();
 			//echo $success;exit;
@@ -151,21 +151,47 @@ class controller
 	public function login()
 	{
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
+	$dbserverusername = "root";
+	$dbserverpassword = "";
+
 
 	try 
 		{
-		$conn = new PDO("mysql:host=$servername;dbname=workout-db", $username, $password);
+		$conn = new PDO("mysql:host=$servername;dbname=workout-db", $dbserverusername, $dbserverpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	   // echo "Connected successfully"; 
 		$stmt = $conn->prepare("select * from user where email = :email"); 
-		$stmt->bindParam( ":email", $_POST["email"]);
+		$stmt->bindParam(":email", $_POST["email"]);
 		$stmt->execute();
+		$user=null;
 		$user = $stmt->fetch();
-		$_SESSION["user"] = $user;
-		return $user;
+
+		echo "<pre>";
+		print_r($user);
+		//exit;
+		if(isset($user) && $user!="")
+		{
+			//echo $_POST["password"];
+			//echo $user["password"];
+			//echo "password_verify:".password_verify($_POST["password"], $user["password"]);exit; 
+			if(password_verify($_POST["password"], $user["password"]))
+			{
+					$_SESSION["user"] = $user;
+					return "login successful";
+			}
+			else
+			{
+				return "incorrect password";
+			}
+		}
+		else
+		{
+			return "email not found";
+		}
+
+		
+		
 		
 		
 		

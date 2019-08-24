@@ -11,16 +11,15 @@ include 'controller.php';
 <body>
 	<?php
 	$c = new controller;
-	$user = $c->login();
+	$msg = $c->login();
+
+	echo $msg;
 	
-	if ($user==null)
+	if (isset($_SESSION["user"]))
 	{
-		echo "unsuccessful login";
+		echo ": ".$_SESSION["user"]["name"];
 	}
-	else
-	{
-		echo "successful login - ".$_SESSION["user"]["name"];
-	}
+	
 	
 	
 	
