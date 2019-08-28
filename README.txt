@@ -27,8 +27,7 @@ user management -done
 session management -done
 register page - done
 unsuccesful login page - done
-password encryption
+password encryption - done
 cookies1
 restrict direct URL Access
-host live
-yii/laravel MVC framework
+
