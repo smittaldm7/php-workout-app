@@ -1,7 +1,15 @@
 # workout
 
+Using PHP, MySQL
+
+Does not not MVC architecture 
+
+Does not use any framework
+
+Uses DriverManager OR Mysqldatasource for db connection
+
 This is an app to randomize the order of body area being exercised. 
-It is assumed thatthe exerciser works out his muscles 1 area at a time.
+It is assumed that the exerciser works out his muscles 1 area at a time.
 This app divides the body's muscles into 3 areas: upper body, lower body and core. 
 An example order which could be suggested would be 
 1. core
